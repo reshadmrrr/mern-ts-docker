@@ -15,7 +15,7 @@ class Logger {
     constructor() {}
 
 }
-export default new Logger();
+module.exports = new Logger();
 
 // type loggerObject = {
 //     info: Function,

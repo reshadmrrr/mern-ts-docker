@@ -1,6 +1,6 @@
+const logger = require("../logger/logger")
 import express from 'express';
 import bodyParser from 'body-parser';
-import  Logger  from '../logger/logger';
 import user from './user';
 class Routes {
     public express: express.Application;
@@ -19,7 +19,7 @@ class Routes {
         this.express = express();
         this.middleware();
         this.routes();
-        this.logger = Logger;     
+        this.logger = logger;     
     }
 }
 
