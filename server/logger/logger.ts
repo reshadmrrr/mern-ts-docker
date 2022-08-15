@@ -1,15 +1,18 @@
+const pine = require('pine');
+const p = pine();
+
 class Logger {
     
-    public info(logText: string): void {
-        console.log(new Date() + "\ninfo::" + logText);
+    public info(logText: string, data?: any): void {
+        p.info(`${logText}  ${data != undefined ? JSON.stringify(data) : ""}`);
     }
 
     public debug(logText: string): void {
-        console.log(new Date() + "\ndebug::" + logText);
+        p.debug(logText);
     }
 
     public error(logText: string): void {
-        console.log(new Date().toUTCString() + "\nerror::" + logText);
+        p.error(logText);
     }
     
     constructor() {}
