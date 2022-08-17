@@ -1,8 +1,9 @@
 import React from 'react';
+import UserModel from '../models/UserModel';
 import MyModal from './Modal';
 
 type Usertype = {
-    users: any[],
+    users: UserModel[] | null,
     deleteUser: Function,
     editUser: Function,
     addUser: Function,
@@ -15,13 +16,12 @@ const Users = ({users, deleteUser, editUser, addUser}: Usertype) => {
         </div>
     );
     
-    const UserRow = (user: any, index: number) => (
+    const UserRow = (user: UserModel, index: number) => (
         <tr key={index}>
             <td>{user._id}</td>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
             <td>{user.email}</td>
-            <td>{user.mobileNumber}</td>
             <td>
                 <MyModal title="Edit User" user={user} func={editUser}/>
                 <button className="btn btn-danger ms-2" onClick={(e) => deleteUser(user._id)}>Delete</button>
@@ -29,7 +29,7 @@ const Users = ({users, deleteUser, editUser, addUser}: Usertype) => {
         </tr>
     );
 
-    const userTable = users.map((user: any, index: number) => UserRow(user, index));
+    const userTable = users?.map((user: UserModel, index: number) => UserRow(user, index));
     
     return (
         <div className="container">
@@ -38,7 +38,7 @@ const Users = ({users, deleteUser, editUser, addUser}: Usertype) => {
                     <h2>Users List</h2>
                 </div>
                 <div className="col-md-6 text-end">
-                <MyModal title="Add User" user={{id: users.length + 1}} func={addUser}/>
+                <MyModal title="Add User" user={new UserModel(users ? users.length + 1 : 1)} func={addUser}/>
                 </div>
                 <div className="col-md-12">
                     <table className="table table-bordered">
@@ -48,7 +48,6 @@ const Users = ({users, deleteUser, editUser, addUser}: Usertype) => {
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
-                                <th>Mobile No.</th>
                                 <th>Action</th>
                             </tr>
                         </thead>

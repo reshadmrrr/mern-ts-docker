@@ -3,11 +3,11 @@ import Header from './Header';
 import Users from './Users';
 import { UserService } from "../services/UserService";
 import MyAlert from './Alert';
-import Alert from './Alert';
+import UserModel from '../models/UserModel';
 
 
 const Home =  () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = useState<UserModel[] | null>([]);
     const [totalUsers, setTotalUsers] = useState(0);
     const [message, setMessage] = useState<JSX.Element | null>();
 
@@ -35,19 +35,19 @@ const Home =  () => {
         removeAlert();
     };
 
-    const editUser = (user: any) => {
+    const editUser = (user: UserModel) => {
         userService.updateUser(user);
         setMessage(<MyAlert message="User has been updated successfully."/>);
         removeAlert();
     };
 
-    const addUser = (user: any) => {
+    const addUser = (user: UserModel) => {
         userService.createUser(user).then(res => {
             if (res._id !== undefined) {
                 setTotalUsers(totalUsers - 1);
             }
         });
-        setMessage( <Alert message="User has been saved successfully."/>);
+        setMessage( <MyAlert message="User has been saved successfully."/>);
         removeAlert();
     };
 

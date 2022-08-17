@@ -2,9 +2,15 @@ import React, {useState} from 'react'
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { useForm } from "react-hook-form";
+import UserModel from '../models/UserModel';
 
+type MyModalType = {
+  title: string,
+  user: UserModel | null,
+  func: Function
+}
 
-const MyModal = ({title, user, func}:{title: string, user: any | null, func: Function}) => {
+const MyModal = ({title, user, func}:MyModalType) => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -32,7 +38,7 @@ const MyModal = ({title, user, func}:{title: string, user: any | null, func: Fun
         <form>
         <div className="row">
             <div className="form-group col-md-3">
-              <input {...register("_id")} type="text" className="form-control" defaultValue={user?.id} name="id" id="id" hidden />
+              <input {...register("_id")} type="text" className="form-control" defaultValue={user?._id} name="id" id="id" hidden />
             </div>
 
         </div>
