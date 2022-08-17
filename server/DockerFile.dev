@@ -1,0 +1,14 @@
+FROM node:lts-alpine
+
+WORKDIR /usr/src/apps/mern-ts-docker/server
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["npm", "run", "start:dev"]
+
